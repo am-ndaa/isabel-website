@@ -1,30 +1,85 @@
 // This file contains the website's content and component structure
 import './App.css'
-import profileImage from './assets/profile.png'
+import profileImage from './assets/profile_img.jpeg'
 
 // This object stores the words and links shown on the page.
 // You can edit the text here without needing to change the layout below.
 // Change these details to make this website yours.
 const siteInfo = {
-  name: 'Amanda Tantalean',
-  role: 'Computer science student',
-  intro: 'I am learning how to build useful things with code, one small project at a time.',
+  name: 'Isabel Tantalean',
+  role: 'Mechanical Engineering Student',
+  intro: 'I design practical solutions through engineering, research, and collaboration—and bring them to life from concept to implementation.',
   // Replace profile.png in src/assets to use your own profile picture.
   image: profileImage,
-  location: 'Based in Gainesville, FL',
-  email: 'capybara@ufl.edu',
-  about: 'I enjoy solving puzzles, learning new tools, and working with people who are curious. This website is a place to share what I am learning and making.',
+  location: 'Based in Gainesville, Florida',
+  email: 'itantalean@gmail.com',
+  about: 'I am pursuing a B.S. in Mechanical Engineering with a minor in Engineering Innovation at the University of Florida (GPA: 4.0, May 2029). My experience spans product development, manufacturing, biomaterials research, and leadership in STEM communities.',
   // Add, remove, or rename languages and tools in this list.
-  skills: ['JavaScript', 'Python', 'React', 'HTML & CSS', 'Git & GitHub'],
-  // Add a new project by copying one of these lines and changing its words.
+  skills: [
+    'SolidWorks (CSWA Certified)',
+    'Fusion 360',
+    'Onshape',
+    '3D printing',
+    'Welding and machining',
+    'Design for manufacturing',
+    'Power tools and soldering',
+    'Microsoft 365',
+    'CRLA Level 3 Training Certified Master Tutor',
+    'Fluent in English and Spanish',
+    'Learning Japanese',
+  ],
+  // Add projects under the category they belong to.
   projects: [
-    { title: 'Calculator', description: 'A simple calculator.', tag: 'Python project' },
-    { title: 'Your swamphacks project...', description: 'Coming Soon.', tag: 'TBD' },
+    {
+      category: 'Internships',
+      projects: [
+        {
+          title: 'Packaging Cost & Utilization Improvements',
+          description: 'As an R&D Intern at Procter & Gamble in Cincinnati (May–Aug 2026), developed recommendations for consolidating bundle films that identified over $150K in cost savings—18% of annual material spend. Proposed site improvements that increased material utilization by 50% and reduced machine downtime by 50%, working across Purchasing, Engineering, and suppliers.',
+          tag: 'Procter & Gamble · 2026',
+        },
+        {
+          title: 'Kakigori Machine Product Line',
+          description: 'Led a team at Himuro Ice in Osaka (Feb–May 2026) to research and develop a new line of Japanese shaved-ice machines from scratch. Created SolidWorks designs and evaluated functionality, marketability, manufacturability, and cost; the product is now in manufacturing. Represented the company at the HCJ convention in Tokyo.',
+          tag: 'Himuro Ice · 2026',
+        },
+      ],
+    },
+    {
+      category: 'Engineering Design',
+      projects: [
+        {
+          title: 'Solar Vehicle Cockpit Systems',
+          description: 'Designing a parking brake system for a custom rotor using SolidWorks and FEA. Also designed mounts for a gas strut to hold the vehicle canopy open for driver access and escape as part of a semester-long team integration project.',
+          tag: 'Solar Gators · 2025–Present',
+        },
+      ],
+    },
+    {
+      category: 'Research',
+      projects: [
+        {
+          title: 'Biomaterials Research',
+          description: 'At Florida Atlantic University’s Kang Biomaterials and Tissue Engineering Group (Jan 2024–May 2025), researched decellularized pig esophagus extracellular matrix as an alternative to animal testing in esophageal cancer research. Presented findings at the Spring 2025 OURI FAU Boca Raton Research Symposium.',
+          tag: 'Undergraduate Research · 2024–2025',
+        },
+      ],
+    },
+    {
+      category: 'Community & Leadership',
+      projects: [
+        {
+          title: 'STEM Community & Mentorship',
+          description: 'As SHPEtina Lead, organize professional and personal development events, including a brand-confidence workshop for over 100 Latinas in STEM, and build peer connections ahead of professional events. As a MentorSHPE mentor, support mentees through weekly mock interviews, resume reviews, and technical training.',
+          tag: 'SHPE · 2026–Present',
+        },
+      ],
+    },
   ],
   // Add your social links here. You can remove any of these if you don't want them to show up.
   links: {
     github: 'https://github.com/your-username',
-    linkedin: 'https://www.linkedin.com/in/your-username',
+    linkedin: 'https://www.linkedin.com/in/isabel-tantalean/',
   },
 }
 
@@ -68,24 +123,31 @@ function App() {
           </div>
         </section>
 
-        {/* This section makes one project row for every project in the list. */}
+        {/* This section groups project leaves under category branches. */}
         <section className="section" id="projects">
           <div className="section-label">02 / Selected work</div>
 
           <div className="section-content">
             <h2>Things I’m making.</h2>
 
-            <div className="project-list">
-              {siteInfo.projects.map((project, index) => (
-                // React needs a key so it can keep track of each project row.
-                <article className="project" key={project.title}>
-                  <p className="project-number">0{index + 1}</p>
-                  <p className="project-tag">{project.tag}</p>
-                  <h3>{project.title}</h3>
-                  <p className="project-description">{project.description}</p>
-                </article>
+            <ul className="project-tree">
+              {siteInfo.projects.map((group) => (
+                <li className="project-group" key={group.category}>
+                  <h3 className="project-group-title">{group.category}</h3>
+                  <ul className="project-leaves">
+                    {group.projects.map((project) => (
+                      <li className="project-leaf" key={project.title}>
+                        <article className="project">
+                          <p className="project-tag">{project.tag}</p>
+                          <h4>{project.title}</h4>
+                          <p className="project-description">{project.description}</p>
+                        </article>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </section>
       </main>
@@ -100,9 +162,9 @@ function App() {
         </div>
 
         <div className="footer-links">
-          <a href={siteInfo.links.github} target="_blank" rel="noreferrer">
+          {/* <a href={siteInfo.links.github} target="_blank" rel="noreferrer">
             GitHub
-          </a>
+          </a> */}
           <a href={siteInfo.links.linkedin} target="_blank" rel="noreferrer">
             LinkedIn
           </a>

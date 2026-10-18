@@ -1,12 +1,12 @@
 /* This file styles the website components and layout */
 :root {
   /* Change these colors to personalize the website's palette. */
-  --ink: #193c3c;
-  --muted: #5d7470;
-  --paper: #f4f0e8;
-  --line: #cbd5cb;
-  --accent: #b159d4;
-  --cream: #e7efe5;
+  --ink: #1f2937;
+  --muted: #66736f;
+  --paper: #f7f8f6;
+  --line: #dce3df;
+  --accent: #287c72;
+  --cream: #e8f1ed;
   --serif: Georgia, 'Times New Roman', serif;
   --sans: 'Trebuchet MS', Arial, sans-serif;
 }
@@ -15,7 +15,9 @@
 body {
   /* Removes the browser's default space around the page. */
   margin: 0;
-  background: var(--paper);
+  background:
+    radial-gradient(ellipse at 88% 7%, rgba(40, 124, 114, 0.09), transparent 32rem),
+    linear-gradient(180deg, #fbfcfa 0%, var(--paper) 55%, #f1f5f2 100%);
   color: var(--ink);
   font-family: var(--sans);
   font-size: 16px;
@@ -68,9 +70,18 @@ a {
   text-transform: uppercase;
 }
 
+.eyebrow {
+  display: inline-block;
+  padding: 7px 12px;
+  border: 1px solid rgba(40, 124, 114, 0.13);
+  border-radius: 999px;
+  background: rgba(232, 241, 237, 0.8);
+}
+
 h1,
 h2,
-h3 {
+h3,
+h4 {
   font-family: var(--serif);
   font-weight: 400;
   line-height: 1.05;
@@ -111,6 +122,10 @@ h2 {
   object-fit: cover;
   /* 50% makes the square image into a circle. */
   border-radius: 50%;
+  border: 8px solid rgba(255, 255, 255, 0.85);
+  box-shadow:
+    0 24px 55px rgba(31, 41, 55, 0.15),
+    0 4px 12px rgba(31, 41, 55, 0.08);
 }
 
 .profile p {
@@ -151,31 +166,118 @@ h2 {
   font-family: inherit;
 }
 
-.project-list {
-  /* Adds a line above the first project. */
+.project-tree,
+.project-leaves {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.project-tree {
+  position: relative;
+  padding-left: 38px;
+}
+
+.project-tree::before {
+  position: absolute;
+  top: 14px;
+  bottom: 34px;
+  left: 12px;
+  border-left: 1px solid var(--line);
+  content: '';
+}
+
+.project-group {
+  position: relative;
+  padding-bottom: 30px;
+}
+
+.project-group:last-child {
+  padding-bottom: 0;
+}
+
+.project-group::before {
+  position: absolute;
+  top: 14px;
+  left: -26px;
+  width: 26px;
   border-top: 1px solid var(--line);
+  content: '';
+}
+
+.project-group::after {
+  position: absolute;
+  top: 9px;
+  left: -32px;
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background: var(--paper);
+  content: '';
+}
+
+.project-group-title {
+  margin: 0 0 14px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.project-leaves {
+  margin-left: 3px;
+  border-left: 1px solid var(--line);
+}
+
+.project-leaf {
+  position: relative;
+  padding: 0 0 14px 22px;
+}
+
+.project-leaf:last-child {
+  padding-bottom: 0;
+}
+
+.project-leaf::before {
+  position: absolute;
+  top: 19px;
+  left: 0;
+  width: 22px;
+  border-top: 1px solid var(--line);
+  content: '';
+}
+
+.project-leaf::after {
+  position: absolute;
+  top: 15px;
+  left: -4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  content: '';
 }
 
 .project {
-  /* Each project row lines up its number, tag, title, and description. */
-  display: grid;
-  grid-template-columns: 45px 110px 1fr 1fr 30px;
-  align-items: center;
-  gap: 25px;
-  padding: 25px 0;
-  border-bottom: 1px solid var(--line);
+  padding: 20px 22px;
+  border: 1px solid rgba(220, 227, 223, 0.85);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.64);
+  transition: background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 
-.project-number {
-  margin: 0;
-  color: var(--accent);
-  font-family: var(--serif);
-  font-size: 20px;
+.project:hover {
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(31, 41, 55, 0.08);
+  transform: translateY(-2px);
 }
 
-.project h3 {
-  margin: 4px 0 5px;
-  font-size: 28px;
+.project h4 {
+  margin: 4px 0 8px;
+  font-size: 24px;
 }
 
 .project-description {
@@ -185,10 +287,6 @@ h2 {
 
 .project-tag {
   margin: 0;
-}
-
-.project-arrow {
-  font-size: 22px;
 }
 
 .footer {
@@ -270,24 +368,28 @@ h2 {
     text-align: left;
   }
 
+  .project-tree {
+    padding-left: 30px;
+  }
+
+  .project-tree::before {
+    left: 9px;
+  }
+
+  .project-group::before {
+    left: -21px;
+    width: 21px;
+  }
+
+  .project-group::after {
+    left: -27px;
+  }
+
   .project {
-    /* Projects use fewer columns on a narrow screen. */
-    grid-template-columns: 35px 1fr 25px;
-    gap: 12px;
+    padding: 17px;
   }
 
-  .project-tag,
-  .project-description {
-    grid-column: 2;
-  }
-
-  .project h3 {
-    grid-column: 2;
-    grid-row: 2;
-  }
-
-  .project-arrow {
-    grid-column: 3;
-    grid-row: 1 / 4;
+  .project h4 {
+    font-size: 21px;
   }
 }

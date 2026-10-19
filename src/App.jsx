@@ -1,6 +1,12 @@
 // This file contains the website's content and component structure
 import './App.css'
 import profileImage from './assets/profile_img.jpeg'
+import himuroImage from './assets/japan.jpg'
+import himuroDesignImage from './assets/japanicemachine.jpg'
+import pngDayOneImage from './assets/png.jpg'
+import pngProductImage from './assets/product.jpg'
+import shpetinaOneImage from './assets/shpetina1.jpg'
+import shpetinaTwoImage from './assets/shpetina2.jpg'
 
 // This object stores the words and links shown on the page.
 // You can edit the text here without needing to change the layout below.
@@ -12,7 +18,7 @@ const siteInfo = {
   // Replace profile.png in src/assets to use your own profile picture.
   image: profileImage,
   location: 'Based in Gainesville, Florida',
-  email: 'itantalean@gmail.com',
+  email: 'itantaleann@gmail.com',
   about: 'I am pursuing a B.S. in Mechanical Engineering with a minor in Engineering Innovation at the University of Florida (GPA: 4.0, May 2029). My experience spans product development, manufacturing, biomaterials research, and leadership in STEM communities.',
   // Add, remove, or rename languages and tools in this list.
   skills: [
@@ -37,11 +43,19 @@ const siteInfo = {
           title: 'Packaging Cost & Utilization Improvements',
           description: 'As an R&D Intern at Procter & Gamble in Cincinnati (May–Aug 2026), developed recommendations for consolidating bundle films that identified over $150K in cost savings—18% of annual material spend. Proposed site improvements that increased material utilization by 50% and reduced machine downtime by 50%, working across Purchasing, Engineering, and suppliers.',
           tag: 'Procter & Gamble · 2026',
+          images: [
+            { src: pngDayOneImage, alt: 'Isabel at Procter & Gamble on her first day' },
+            { src: pngProductImage, alt: 'Isabel holding a ZzzQuil product bundle at work' },
+          ],
         },
         {
           title: 'Kakigori Machine Product Line',
           description: 'Led a team at Himuro Ice in Osaka (Feb–May 2026) to research and develop a new line of Japanese shaved-ice machines from scratch. Created SolidWorks designs and evaluated functionality, marketability, manufacturability, and cost; the product is now in manufacturing. Represented the company at the HCJ convention in Tokyo.',
           tag: 'Himuro Ice · 2026',
+          images: [
+            { src: himuroImage, alt: 'Isabel presenting a Himuro shaved-ice machine at a Tokyo convention' },
+            { src: himuroDesignImage, alt: 'Dimensioned concept sketch of a hand-cranked kakigori machine' },
+          ],
         },
       ],
     },
@@ -72,6 +86,11 @@ const siteInfo = {
           title: 'STEM Community & Mentorship',
           description: 'As SHPEtina Lead, organize professional and personal development events, including a brand-confidence workshop for over 100 Latinas in STEM, and build peer connections ahead of professional events. As a MentorSHPE mentor, support mentees through weekly mock interviews, resume reviews, and technical training.',
           tag: 'SHPE · 2026–Present',
+          imageLayout: 'landscape',
+          images: [
+            { src: shpetinaOneImage, alt: 'Isabel with another SHPEtina member at a community event' },
+            { src: shpetinaTwoImage, alt: 'SHPE members gathered for a community discussion' },
+          ],
         },
       ],
     },
@@ -141,6 +160,19 @@ function App() {
                           <p className="project-tag">{project.tag}</p>
                           <h4>{project.title}</h4>
                           <p className="project-description">{project.description}</p>
+                          {project.images && (
+                            <div className={`project-gallery${project.images.length === 1 ? ' project-gallery--single' : ''}${project.imageLayout ? ` project-gallery--${project.imageLayout}` : ''}`}>
+                              {project.images.map((image) => (
+                                <img
+                                  className="project-gallery-image"
+                                  key={image.src}
+                                  src={image.src}
+                                  alt={image.alt}
+                                  loading="lazy"
+                                />
+                              ))}
+                            </div>
+                          )}
                         </article>
                       </li>
                     ))}

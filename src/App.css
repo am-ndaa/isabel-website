@@ -285,6 +285,29 @@ h2 {
   color: var(--muted);
 }
 
+.project-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.project-gallery--single {
+  grid-template-columns: minmax(0, 360px);
+}
+
+.project-gallery--landscape .project-gallery-image {
+  aspect-ratio: 4 / 3;
+}
+
+.project-gallery-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
 .project-tag {
   margin: 0;
 }
